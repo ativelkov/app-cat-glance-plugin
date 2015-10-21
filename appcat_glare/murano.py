@@ -16,10 +16,10 @@ from appcat_glare import base
 from glance.common.artifacts import definitions
 
 
-class HeatTemplate(definitions.ArtifactType, base.AppCatBase):
-    __endpoint__ = 'templates'
-    environment = definitions.Dict()
-    template_version = definitions.String(allowed_values=[
-        '2013-05-23', '2014-10-16', '2015-04-30', '2015-10-15'], required=True,
-        mutable=False)  # see http://docs.openstack.org/developer/heat/template_guide/hot_spec.html#hot-spec for list of allowed template version
-    template = definitions.BinaryObject(required=True)
+class MuranoPackage(definitions.ArtifactType, base.AppCatBase):
+    __endpoint__ = 'murano'
+    fqn = definitions.String(required=True, mutable=False)
+    package_type = definitions.String(allowed_values=['Application', 'Library'],
+                                      required=True,
+                                      mutable=False)
+    archive = definitions.BinaryObject(required=True)
